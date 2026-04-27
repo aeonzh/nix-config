@@ -1,10 +1,9 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # Language Servers
-    gopls
+    # Language Servers — global tier (no heavy toolchain pulled)
     lua-language-server
-    typescript-language-server
     yaml-language-server
+    nil
   ];
 
   programs.neovim = {
@@ -75,7 +74,7 @@
 
     initLua = ''
       -- LSP Setup
-      vim.lsp.enable({ 'lua_ls', 'gopls', 'ts_ls' })
+      vim.lsp.enable({ 'lua_ls', 'yamlls', 'nil_ls', 'gopls', 'ts_ls', 'ruby_lsp' })
 
       vim.api.nvim_create_autocmd('LspAttach', {
           callback = function(args)

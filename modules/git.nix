@@ -4,14 +4,12 @@
   isWSL,
   ...
 }: {
-  home.packages = with pkgs; [git git-lfs];
-
   programs.git = {
     enable = true;
     ignores = ["**/.claude/settings.local.json"];
 
-    settings =
-      lib.recursiveUpdate
+    settings = lib.mkMerge [
+      # Base — every host
       {
         user = {
           name = "Zheng He Hu";
@@ -20,7 +18,6 @@
         };
 
         gpg.format = "ssh";
-
         commit.gpgsign = true;
 
         alias = {
@@ -36,15 +33,17 @@
         color.ui = "auto";
         core.excludesfile = "~/.gitignore";
       }
-      (
-        if isWSL
-        then {
-          core.sshCommand = "ssh.exe";
-          gpg.ssh = {
-            program = "/mnt/c/Users/Princess Jhin/AppData/Local/Microsoft/WindowsApps/op-ssh-sign-wsl.exe";
-          };
-        }
-        else {}
-      );
+
+      # macOS — both Macs (work + mac) — 1Password macOS app
+      (lib.mkIf pkgs.stdenv.isDarwin {
+        gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      })
+
+      # WSL — Windows-side bridge to Windows 1Password
+      (lib.mkIf isWSL {
+        core.sshCommand = "ssh.exe";
+        gpg.ssh.program = "/mnt/c/Users/Princess Jhin/AppData/Local/Microsoft/WindowsApps/op-ssh-sign-wsl.exe";
+      })
+    ];
   };
 }

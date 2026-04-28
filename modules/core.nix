@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   # Core system utilities and essential packages
   home.packages = with pkgs; [
     curl

@@ -3,10 +3,11 @@
   lib,
   isWSL,
   ...
-}: {
+}:
+{
   programs.git = {
     enable = true;
-    ignores = ["**/.claude/settings.local.json"];
+    ignores = [ "**/.claude/settings.local.json" ];
 
     settings = lib.mkMerge [
       # Base — every host

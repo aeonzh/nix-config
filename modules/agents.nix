@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # AI Agents and autonomous coding tools
   home.packages = with pkgs; [
     github-copilot-cli
@@ -10,7 +11,9 @@
       theme = "Default";
       selectedAuthType = "oauth-personal";
       checkpointing = true;
-      experimental = {enableAgents = true;};
+      experimental = {
+        enableAgents = true;
+      };
       security.auth.selectedType = "oauth-personal";
       ui = {
         footer = {
@@ -39,7 +42,7 @@
             reasoningEffort = "medium";
             reasoningSummary = "auto";
             textVerbosity = "medium";
-            include = ["reasoning.encrypted_content"];
+            include = [ "reasoning.encrypted_content" ];
             store = false;
           };
         };

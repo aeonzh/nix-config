@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Language Servers — global tier (no heavy toolchain pulled)
     lua-language-server
@@ -19,8 +20,8 @@
       catppuccin-nvim
 
       # Treesitter
-      (nvim-treesitter.withPlugins (plugins:
-        with plugins; [
+      (nvim-treesitter.withPlugins (
+        plugins: with plugins; [
           go
           gomod
           gosum
@@ -33,7 +34,8 @@
           markdown
           markdown_inline
           dockerfile
-        ]))
+        ]
+      ))
       nvim-treesitter-context
 
       # LSP Configs (provides configs for vim.lsp.enable)

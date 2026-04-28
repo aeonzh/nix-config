@@ -49,14 +49,13 @@
 
     # Per-host module bundles — populated in Step 6
     macExtras = [
-      # ./modules/kitty.nix
+      ./modules/kitty.nix
     ];
     workExtras = [
-      # ./modules/k8s.nix
-      # ./modules/iac.nix
-      # ./modules/mobile.nix
-      # ./modules/ci.nix
-      # ./modules/aws.nix
+      ./modules/k8s.nix
+      ./modules/iac.nix
+      ./modules/circleci.nix
+      ./modules/aws.nix
     ];
   in {
     homeConfigurations = {

@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -35,7 +36,9 @@
     enable = true;
     nix-direnv.enable = true;
     # bats test suite hangs in the aarch64-darwin sandbox; skip it.
-    package = pkgs.direnv.overrideAttrs (_: {doCheck = false;});
+    package = pkgs.direnv.overrideAttrs (_: {
+      doCheck = false;
+    });
   };
 
   programs.eza = {
@@ -91,4 +94,6 @@
       "j"
     ];
   };
+
+  home.sessionVariables._ZO_DATA_DIR = "$HOME/.local/share";
 }

@@ -1,3 +1,5 @@
+tap "nikitabobko/tap"
+
 cask "1password"
 cask "aerospace"
 cask "neru"

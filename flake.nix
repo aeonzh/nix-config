@@ -49,6 +49,7 @@
 
       macExtras = [
         ./modules/kitty.nix
+        ./modules/homebrew.nix
       ];
       workExtras = [
         ./modules/k8s.nix

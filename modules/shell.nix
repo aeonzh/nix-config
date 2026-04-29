@@ -25,11 +25,15 @@
       delds = "${lib.getExe pkgs.fd} -H .DS_Store -x rm";
     };
 
-    initContent = ''
-      # Misc
-      setopt correct
-      export PATH="$HOME/.local/bin:$PATH"
-    '';
+    initContent =
+      ''
+        # Misc
+        setopt correct
+        export PATH="$HOME/.local/bin:$PATH"
+      ''
+      + lib.optionalString pkgs.stdenv.isDarwin ''
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      '';
   };
 
   programs.direnv = {

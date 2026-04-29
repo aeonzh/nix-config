@@ -1,0 +1,8 @@
+cask "1password"
+cask "aerospace"
+cask "neru"
+cask "obs"
+cask "obsidian"
+cask "raindropio"
+cask "raycast"
+cask "tailscale-app"

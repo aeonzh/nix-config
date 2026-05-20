@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # Language Servers — global tier (no heavy toolchain pulled)
     lua-language-server
     yaml-language-server
     nil
@@ -28,6 +27,7 @@
           gowork
           lua
           typescript
+          tsx
           javascript
           yaml
           json
@@ -43,7 +43,6 @@
 
       # UI / Tools
       diffview-nvim
-      fzf-vim
       fzf-lua
       vim-peekaboo
     ];
@@ -70,11 +69,37 @@
       set background=dark
 
       " Filetypes
-      autocmd BufRead,BufNewFile */.circleci/config.{yaml,yml} set ft=circleci-yaml
       autocmd BufRead,BufNewFile Brewfile* set ft=ruby
     '';
 
     initLua = ''
+      vim.o.winborder = 'solid'
+
+      vim.keymap.set('n', 'gl', '<cmd>FzfLua diagnostics_workspace<CR>')
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+
+      vim.opt.updatetime = 250
+      vim.api.nvim_create_autocmd('CursorHold', {
+        callback = function()
+          vim.diagnostic.open_float(nil, { focus = false })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.opt.foldtext = ""
+      vim.opt.fillchars:append({ fold = ' ' })
+      vim.opt.foldminlines = 5
+      vim.opt.foldnestmax = 2
+      vim.opt.foldlevel = 1
+      vim.opt.foldlevelstart = 1
+
       -- LSP Setup
       vim.lsp.enable({ 'lua_ls', 'yamlls', 'nil_ls', 'gopls', 'ts_ls', 'ruby_lsp' })
 

@@ -21,19 +21,17 @@
 
     shellAliases = {
       g = "${lib.getExe pkgs.git}";
-      dots = "${lib.getExe pkgs.git} --git-dir=$HOME/src/dotfiles --work-tree=$HOME";
       delds = "${lib.getExe pkgs.fd} -H .DS_Store -x rm";
     };
 
-    initContent =
-      ''
-        # Misc
-        setopt correct
-        export PATH="$HOME/.local/bin:$PATH"
-      ''
-      + lib.optionalString pkgs.stdenv.isDarwin ''
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-      '';
+    initContent = ''
+      # Misc
+      setopt correct
+      export PATH="$HOME/.local/bin:$PATH"
+    ''
+    + lib.optionalString pkgs.stdenv.isDarwin ''
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    '';
   };
 
   programs.direnv = {
@@ -43,6 +41,11 @@
     package = pkgs.direnv.overrideAttrs (_: {
       doCheck = false;
     });
+    config = {
+      global = {
+        hide_env_diff = true;
+      };
+    };
   };
 
   programs.eza = {
@@ -76,6 +79,19 @@
       a = true;
       d = true;
       H = true;
+    };
+  };
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      mgr = {
+        ratio = [
+          1
+          2
+          5
+        ];
+      };
     };
   };
 

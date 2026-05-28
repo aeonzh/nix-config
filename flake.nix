@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -32,7 +33,7 @@
             {
               home.username = "zhh";
               home.homeDirectory = homeDirectory;
-              home.stateVersion = "25.11";
+              home.stateVersion = "26.05";
 
               # Shared modules — every host
               imports = [

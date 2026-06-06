@@ -44,6 +44,7 @@
       # UI / Tools
       diffview-nvim
       fzf-lua
+      nvim-tree-lua
       vim-peekaboo
     ];
 

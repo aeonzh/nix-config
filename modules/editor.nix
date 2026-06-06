@@ -76,6 +76,20 @@
     initLua = ''
       vim.o.winborder = 'solid'
 
+      -- nvim-tree (disable netrw before setup, as recommended)
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      require('nvim-tree').setup({
+        sync_root_with_cwd = true,
+        respect_buf_cwd = true,
+        update_focused_file = { enable = true, update_root = true },
+        view = { width = 35 },
+        renderer = { group_empty = true },
+        actions = { open_file = { quit_on_open = false } },
+      })
+      vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file tree' })
+      vim.keymap.set('n', '<leader>E', '<cmd>NvimTreeFindFile<CR>', { desc = 'Reveal file in tree' })
+
       vim.keymap.set('n', 'gl', '<cmd>FzfLua diagnostics_workspace<CR>')
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 

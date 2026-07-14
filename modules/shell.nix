@@ -10,6 +10,12 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    envExtra = lib.optionalString pkgs.stdenv.isDarwin ''
+      if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+        . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      fi
+    '';
+
     history = {
       size = 10000;
       save = 10000;

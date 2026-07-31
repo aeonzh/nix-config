@@ -6,7 +6,7 @@
     pi-coding-agent
   ];
 
-  programs.gemini-cli.enable = true;
+  programs.antigravity-cli.enable = true;
   programs.opencode.enable = true;
   programs.codex.enable = true;
 }

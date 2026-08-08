@@ -1,10 +1,4 @@
-tap "nikitabobko/tap"
-tap "y3owk1n/tap"
-
 cask "1password"
-cask "nikitabobko/tap/aerospace"
-cask "y3owk1n/tap/neru"
-cask "obs"
 cask "obsidian"
 cask "raindropio"
 cask "raycast"

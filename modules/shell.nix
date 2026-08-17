@@ -76,17 +76,6 @@
     ];
   };
 
-  programs.nnn = {
-    enable = true;
-    quitcd = true;
-    enableZshIntegration = true;
-    options = {
-      n = true;
-      a = true;
-      d = true;
-      H = true;
-    };
-  };
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
